@@ -33,37 +33,21 @@ def cal_ployarea(points):
     y = points[:,1]
     return 0.5*np.abs(np.dot(x,np.roll(y,1))-np.dot(y,np.roll(x,1)))
 
-def _create_category(schema=0):
 
-    if schema==0:
-        
-        categories = \
-            [{"supercategory": "layout", "id": 0, "name": "Background"},
-             {"supercategory": "layout", "id": 1, "name": "TextRegion"},
-             {"supercategory": "layout", "id": 2, "name": "ImageRegion"},
-             {"supercategory": "layout", "id": 3, "name": "TableRegion"},
-             {"supercategory": "layout", "id": 4, "name": "MathsRegion"},
-             {"supercategory": "layout", "id": 5, "name": "SeparatorRegion"},
-             {"supercategory": "layout", "id": 6, "name": "OtherRegion"}]
-        
-        find_categories = lambda name: \
-            [val["id"] for val in categories if val['name'] == name][0]
-        
-        conversion = \
-            {
-                'TextRegion':       find_categories("TextRegion"),
-                'TableRegion':      find_categories("TableRegion"),
-                'MathsRegion':      find_categories("MathsRegion"),
-                'ChartRegion':      find_categories("ImageRegion"),
-                'GraphicRegion':    find_categories("ImageRegion"),
-                'ImageRegion':      find_categories("ImageRegion"),
-                'LineDrawingRegion':find_categories("OtherRegion"),
-                'SeparatorRegion':  find_categories("SeparatorRegion"),
-                'NoiseRegion':      find_categories("OtherRegion"),
-                'FrameRegion':      find_categories("OtherRegion"),
-            }
-        
+def _create_category(schema=0):
+    if schema == 0:
+        categories = [
+            {"supercategory": "layout", "id": 1, "name": "title"},
+            {"supercategory": "layout", "id": 2, "name": "text"},
+        ]
+
+        conversion = {
+            'title': 1,
+            'text': 2,
+        }
+
         return categories, conversion
+
 
 _categories, _categories_conversion = _create_category(schema=0)
 
